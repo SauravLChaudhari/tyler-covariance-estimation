@@ -11,24 +11,25 @@ By applying Tyler's estimator to asset returns, we obtain a **robust covariance 
 ## Mathematical Model
 
 Given `n` observations (returns) `x₁,…,xₙ` in `ℝᵖ`, Tyler's estimator finds a scatter matrix `S` satisfying:
-S = (p / n) * Σ_i [ (x_i x_iᵀ) / (x_iᵀ S⁻¹ x_i) ]
+`S = (p / n) * Σ_i [ (x_i x_iᵀ) / (x_iᵀ S⁻¹ x_i) ]`
 
 This is solved by fixed‑point iteration:
 
 1. Initialize `S` (e.g., identity matrix).
 2. For each iteration, update:
-3. S_new = (p / n) * Σ_i [ (x_i x_iᵀ) / (x_iᵀ S⁻¹ x_i) ]
-4. 3. Normalize to have unit determinant (or trace) to avoid scaling ambiguity.
+   `S_new = (p / n) * Σ_i [ (x_i x_iᵀ) / (x_iᵀ S⁻¹ x_i) ]`
+3. Normalize to have unit determinant (or trace) to avoid scaling ambiguity.
 
 The solution is the **MLE** for a multivariate t‑distribution and is robust to outliers.
 
 ## Repository Contents
 
 - `src/` – core modules
-- `tyler_estimator.py`: implementation of Tyler's iterative algorithm
-- `data_loader.py`: fetches asset data from Yahoo Finance
-- `portfolio_optimizer.py`: minimum variance portfolio with robust covariance
-- `visualization.py`: plots portfolio weights and performance
+  - `tyler_estimator.py`: implementation of Tyler's iterative algorithm
+  - `data_loader.py`: fetches asset data / loads local data
+  - `portfolio_optimizer.py`: minimum variance portfolio with robust covariance
+  - `visualization.py`: plots portfolio weights and performance
+  - `generate_dummy_data.py`: simulates market data with a built-in "crash"
 - `notebooks/` – interactive demo with backtest
 - `tests/` – unit tests
 
